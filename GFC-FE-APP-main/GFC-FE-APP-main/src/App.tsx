@@ -7,6 +7,7 @@ import Login from './components/Login';
 import FormHeader from './components/ConfigureQuestionPaper/FormHEader';
 import CenteredTabs from './components/common/Tabs';
 import ThankYouPage from './components/ThankYou/ThankYouPage';
+import MyResponseView from './components/MyResponse/MyResponseView';
 import { ROUTE_PATHS } from './utils/constants';
 import { ThemeProvider } from './components/contexts/themeContext';
 import { Toaster } from 'react-hot-toast';
@@ -69,6 +70,16 @@ function App() {
                 element={
                   <ProtectedRoute
                     element={<ThankYouPage />}
+                  />
+                }
+              />
+
+              {/* my response page to view submitted response */}
+              <Route
+                path={ROUTE_PATHS.MY_RESPONSE}
+                element={
+                  <ProtectedRoute
+                    element={<MyResponseView />}
                   />
                 }
               />

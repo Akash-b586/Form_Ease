@@ -75,3 +75,48 @@ export const saveUserResponseController = (req: any, res: any) => {
       res.status(500).json({ "message": REQUEST_FAILURE_MESSAGES.ERROR_INSAVING_USER_RESPONSE });
     });
 }
+
+export const getMyResponseController = (req: any, res: any) => {
+  const { documentId, userId } = req.params;
+  
+  // Check if the requesting user is the same as the userId in params
+  if (!req.isUserAuth) {
+    return res.status(401).send({ message: "Unauthorized access" });
+  }
+
+  UserReponse.findOne({ documentId, userId }, { _id: 0, __v: 0 })
+    .populate({
+      path: 'documentId',
+      model: 'Document',
+      select: 'documentName documentDescription questions -_id'
+    })
+    .populate({
+      path: 'userId',
+      model: 'User', 
+      select: 'username -_id'
+    })
+    .then((response: any) => {
+      if (!response) {
+        return res.status(404).json({ 
+          message: "No response found for this user and document" 
+        });
+      }
+
+      const data = {
+        documentName: response.documentId.documentName,
+        documentDescription: response.documentId.documentDescription,
+        questions: response.documentId.questions,
+        answers: response.answers,
+        submittedOn: response.submittedOn,
+        username: response.userId.username
+      };
+
+      res.status(200).send(data);
+    })
+    .catch((error: any) => {
+      logger.error(REQUEST_FAILURE_MESSAGES.ERROR_IN_FETCHING_USER_RESPONSE, error.message);
+      res.status(500).json({ 
+        message: REQUEST_FAILURE_MESSAGES.ERROR_IN_FETCHING_USER_RESPONSE 
+      });
+    });
+}

@@ -69,7 +69,8 @@ export const enum API_REQUEST_ROUTES {
   DELETE_DOCUMENT_BY_ID = '/delete/:documentId',
   GET_USER_RESPONSE_BY_ID = '/user-response/:documentId',
   SAVE_USER_RESPONSE = '/user-response/:documentId',
-  GET_USER_RESPONSE_BY_USER_ID = '/user-response/:userId/:documentId'
+  GET_USER_RESPONSE_BY_USER_ID = '/user-response/:userId/:documentId',
+  GET_MY_RESPONSE = '/user-response/my/:documentId/:userId'
 }
 
 export const UNAUTHORIZED_ACCESS = "Unauthorised resource access..!";
