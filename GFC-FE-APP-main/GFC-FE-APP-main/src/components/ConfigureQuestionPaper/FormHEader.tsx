@@ -27,9 +27,10 @@ function FormHeader() {
   let params = useParams();
   const location = useLocation();
   const isEditable = location.state?.edit || false;
+  const isUserView = location.pathname.includes('/viewform/');
 
   useEffect(() => {
-    if (!isEditable) {
+    if (!isEditable || isUserView) {
       dispatch({ type: QUESTION_ACTION_TYPES.VIEW_DOCUMENT });
     }
   }, []);
@@ -150,7 +151,7 @@ function FormHeader() {
                 </IconButton>
               </Tooltip>
 
-              <AlertDialog url={`${window.location.origin}${location.pathname}`} />
+              <AlertDialog url={`${window.location.origin}/viewform/${params.documentId}`} />
 
               <Tooltip title="More">
                 <IconButton>

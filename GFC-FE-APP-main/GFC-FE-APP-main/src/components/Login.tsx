@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useMemo } from "react";
+import { useLocation, useNavigate, useSearchParams, Navigate } from "react-router-dom";
 import { HTTP_METHODS, REQUEST_FAILURE_MESSAGES, REQUEST_IN_PROGRESS, REQUEST_SUCCESS_MESSAGES, REQUEST_URLS, ROUTE_PATHS, SESSION_STORAGE_KEYS, UserLogin, UserRegister } from "../utils/constants";
 import { validateEmail } from "../utils/util";
 import "./Login.scss";
@@ -14,18 +14,49 @@ function Login() {
   let [login, setLogin] = useState<UserLogin>({});
   const navigate = useNavigate();
   const { HttpRequestController, isRequestPending, handlePromiseRequest } = useAxios();
-  const { handleLogin } = useAuth();
+  const { handleLogin, isLoggedIn } = useAuth();
+  const [searchParams] = useSearchParams();
   const location = useLocation();
-  const { from } = location.state || { from: { pathname: ROUTE_PATHS.HOME } };
+  const [didLogin, setDidLogin] = useState(false);
+  
+  // Capture redirect URL once on mount to avoid losing it
+  const [redirectTo] = useState(() => {
+    const fromState = (location.state as any)?.from;
+    const fromQuery = new URLSearchParams(window.location.search).get("redirect");
+    const result = fromState || fromQuery || ROUTE_PATHS.HOME;
+    
+    console.log("Login Debug - window.location.href:", window.location.href);
+    console.log("Login Debug - window.location.search:", window.location.search);
+    console.log("Login Debug - location.state:", location.state);
+    console.log("Login Debug - fromQuery (URLSearchParams):", fromQuery);
+    console.log("Login Debug - fromState:", fromState);
+    console.log("Login Debug - final redirectTo (captured once):", result);
+    
+    return result;
+  });
+
+  console.log("Login Debug - redirectTo:", redirectTo);
+  console.log("Login Debug - isLoggedIn:", isLoggedIn);
+  console.log("Login Debug - didLogin:", didLogin);
+
+  // If we just logged in, perform immediate redirect
+  if (didLogin && isLoggedIn) {
+    console.log("Login Debug - Performing immediate redirect to:", redirectTo);
+    return <Navigate to={redirectTo} replace />;
+  }
 
   const setLocalStorageData = (response: any) => {
+    console.log("Login Debug - setLocalStorageData called, redirectTo:", redirectTo);
     localStorage.setItem(SESSION_STORAGE_KEYS.TOKEN, response.token);
     localStorage.setItem(SESSION_STORAGE_KEYS.EMAIL, response.data.email);
     localStorage.setItem(SESSION_STORAGE_KEYS.USER_ID, response.data.userId);
     localStorage.setItem(SESSION_STORAGE_KEYS.USERNAME, response.data.username);
     localStorage.setItem(SESSION_STORAGE_KEYS.IS_AUTH, 'true');
-    navigate(from, { replace: true });
+    
+    // Flip auth state and trigger immediate redirect
     handleLogin(true);
+    setDidLogin(true);
+    console.log("Login Debug - Set didLogin=true and called handleLogin(true)");
   }
 
   const sendLoginRequest = async () => {
