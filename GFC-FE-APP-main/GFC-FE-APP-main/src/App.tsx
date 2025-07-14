@@ -6,6 +6,7 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-route
 import Login from './components/Login';
 import FormHeader from './components/ConfigureQuestionPaper/FormHEader';
 import CenteredTabs from './components/common/Tabs';
+import ThankYouPage from './components/ThankYou/ThankYouPage';
 import { ROUTE_PATHS } from './utils/constants';
 import { ThemeProvider } from './components/contexts/themeContext';
 import { Toaster } from 'react-hot-toast';
@@ -58,6 +59,16 @@ function App() {
                         </ThemeProvider>
                       </DocumentContextProvider>
                     }
+                  />
+                }
+              />
+
+              {/* thank you page after form submission */}
+              <Route
+                path={ROUTE_PATHS.THANK_YOU}
+                element={
+                  <ProtectedRoute
+                    element={<ThankYouPage />}
                   />
                 }
               />

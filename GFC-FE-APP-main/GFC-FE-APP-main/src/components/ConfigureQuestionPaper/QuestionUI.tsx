@@ -93,7 +93,7 @@ export function QuestionForm() {
       }
       await HttpRequestController(`${REQUEST_URLS.USER_RESPONSE}/${params.documentId}`, HTTP_METHODS.POST, payload);
       toast.success(REQUEST_SUCCESS_MESSAGES.REQUEST_SAVED_SUCCESSFULLY);
-      navigate(ROUTE_PATHS.HOME, { replace: true });
+      navigate(`/thank-you/${params.documentId}`, { replace: true });
     }
   }
 

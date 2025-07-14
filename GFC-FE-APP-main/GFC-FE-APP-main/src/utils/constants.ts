@@ -41,7 +41,9 @@ export enum ROUTE_PATHS {
   HOME = '/',
   LOGIN = '/login',
   QUESTION_PAPER = '/forms/:documentId',
-  USERVIEW = '/viewform/:documentId'
+  USERVIEW = '/viewform/:documentId',
+  THANK_YOU = '/thank-you/:documentId',
+  MY_RESPONSE = '/my-response/:documentId'
 }
 
 export enum UPDATE_QUESTION_STATE {
@@ -56,7 +58,8 @@ export enum REQUEST_URLS {
   GET_DOCUMENT = '/document',
   DELETE_DOCUMENT = '/delete',
   UPDATE_DOCUMENT = '/update-document',
-  USER_RESPONSE = '/user-response'
+  USER_RESPONSE = '/user-response',
+  MY_RESPONSE = '/user-response/my'
 }
 
 export enum PROFILE_ACTION_MENUS {
