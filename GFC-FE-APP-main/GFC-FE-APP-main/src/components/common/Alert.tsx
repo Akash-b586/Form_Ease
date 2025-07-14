@@ -42,6 +42,10 @@ const AlertDialog: React.FC<any> = ({ url }) => {
 
   const handleClose = () => {
     setOpen(false);
+    // Remove hash from URL when closing the dialog
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
   };
 
   const [value, setValue] = React.useState(1);
@@ -51,7 +55,7 @@ const AlertDialog: React.FC<any> = ({ url }) => {
   };
 
   return (<div>
-    <Button variant="contained" color="success" href="#contained-buttons" onClick={handleClickOpen}>Send</Button>
+    <Button variant="contained" color="success" onClick={handleClickOpen}>Send</Button>
     <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" className="dialog" aria-describedby="alert-dialog-description">
       <div className="dialog-content">
         <div className="dialog-title">

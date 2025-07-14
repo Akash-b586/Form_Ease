@@ -112,7 +112,13 @@ function FormHeader() {
                 type="text"
                 placeholder="Untitled form"
                 className="form-name"
-                value={documentName} />
+                value={documentName}
+                onChange={(e) => {
+                  dispatch({
+                    type: QUESTION_ACTION_TYPES.UPDATE_DOCUMENT_NAME,
+                    payload: { documentName: e.target.value }
+                  });
+                }} />
               <IconButton><FolderOpenIcon className="form-header-icon" ></FolderOpenIcon></IconButton>
               <IconButton><StarBorderIcon className="form-header-icon" /></IconButton>
             </div>
