@@ -43,6 +43,40 @@ export function QuestionForm() {
     updateToolBoxPosition();
   }, [currentFocusedQuestionId, questions]);
 
+  // Specifically handle when currentFocusedQuestionId changes
+  useEffect(() => {
+    if (currentFocusedQuestionId) {
+      // Add a longer delay to ensure DOM elements are properly rendered and positioned
+      setTimeout(() => {
+        const element = document.getElementById(currentFocusedQuestionId);
+        if (element) {
+          updateToolBoxPosition();
+        }
+      }, 100);
+    }
+  }, [currentFocusedQuestionId]);
+
+  // Initialize toolkit position on component mount
+  useEffect(() => {
+    if (questions.length > 0 && !viewDocument) {
+      // Set initial position to first question if none is focused
+      const initializePosition = () => {
+        if (!currentFocusedQuestionId && questions[0]) {
+          const firstQuestionRect = document.getElementById(questions[0]._id)?.getBoundingClientRect();
+          const containerRect = document.getElementsByClassName('question-form')[0]?.getBoundingClientRect();
+          if (firstQuestionRect && containerRect) {
+            const scrollTop = document.getElementsByClassName('question-form')[0].scrollTop;
+            const relativeTop = firstQuestionRect.top - containerRect.top + scrollTop + 40;
+            setYOffset(Math.max(0, relativeTop));
+          }
+        }
+      };
+      
+      // Add small delay to ensure DOM elements are fully rendered
+      setTimeout(initializePosition, 100);
+    }
+  }, [questions, viewDocument]);
+
   const updateDocument = (): void => {
     handlePromiseRequest(async () => {
       let payload = {
@@ -106,17 +140,36 @@ export function QuestionForm() {
   }
 
   const isElementBoxVisible = (): boolean => {
-    let elementRect = document.getElementById(currentFocusedQuestionId)?.getBoundingClientRect() || { top: 0, bottom: 0 };
-    let containerRect = document.getElementsByClassName('question-form')[0]?.getBoundingClientRect();
-    return elementRect?.top >= containerRect?.top && elementRect.bottom <= containerRect.bottom;
+    const currentElement = document.getElementById(currentFocusedQuestionId);
+    const containerElement = document.getElementsByClassName('question-form')[0];
+    
+    if (!currentElement || !containerElement) {
+      return false;
+    }
+    
+    const elementRect = currentElement.getBoundingClientRect();
+    const containerRect = containerElement.getBoundingClientRect();
+    
+    return elementRect.top >= containerRect.top && 
+           elementRect.bottom <= containerRect.bottom && 
+           elementRect.top < containerRect.bottom - 100; // Add some buffer
   }
 
   // Function to handle scroll event
   const handleScrollFunction = (event: any) => {
-    if (isElementBoxVisible()) {
+    const scrollTop = event.target.scrollTop;
+    
+    if (currentFocusedQuestionId && isElementBoxVisible()) {
       updateToolBoxPosition();
-    } else {
-      setYOffset(event.target.scrollTop);
+    } else if (currentFocusedQuestionId) {
+      // Position toolkit relative to the focused question even if not visible
+      const currentElement = document.getElementById(currentFocusedQuestionId);
+      if (currentElement) {
+        const elementRect = currentElement.getBoundingClientRect();
+        const containerRect = document.getElementsByClassName('question-form')[0]?.getBoundingClientRect();
+        const relativeTop = elementRect.top - containerRect.top + scrollTop + 40;
+        setYOffset(Math.max(0, relativeTop));
+      }
     }
   };
 
@@ -124,19 +177,39 @@ export function QuestionForm() {
 
   // updates tool box position when new question box is added
   const handleUpdateToolBoxPosition = (): void => {
+    if (!currentFocusedQuestionId) {
+      return;
+    }
+    
+    const currentElement = document.getElementById(currentFocusedQuestionId);
+    const containerElement = document.getElementsByClassName('question-form')[0];
+    
+    if (!currentElement || !containerElement) {
+      return;
+    }
+    
     if (!isElementBoxVisible()) {
-      document.getElementById(currentFocusedQuestionId)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      currentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // After scrolling, update position
+      setTimeout(() => {
+        const updatedElementRect = currentElement.getBoundingClientRect();
+        const updatedContainerRect = containerElement.getBoundingClientRect();
+        const scrollTop = containerElement.scrollTop;
+        const targetTopRelativeToContainer = updatedElementRect.top - updatedContainerRect.top + scrollTop + 40;
+        setYOffset(Math.max(0, targetTopRelativeToContainer));
+      }, 300);
     } else {
-      const accordionRect = document.getElementById(currentFocusedQuestionId)?.getBoundingClientRect();
-      if (accordionRect) {
-        const scrollTop = document.getElementsByClassName('question-form')[0].scrollTop;
-        let targetTopRelativeToDiv = accordionRect.top - 120 + scrollTop;
-        setYOffset(targetTopRelativeToDiv);
-      }
+      const accordionRect = currentElement.getBoundingClientRect();
+      const containerRect = containerElement.getBoundingClientRect();
+      const scrollTop = containerElement.scrollTop;
+      
+      // Calculate position relative to the container with offset for proper alignment
+      const targetTopRelativeToContainer = accordionRect.top - containerRect.top + scrollTop + 40;
+      setYOffset(Math.max(0, targetTopRelativeToContainer));
     }
   }
 
-  const updateToolBoxPosition = debounce(handleUpdateToolBoxPosition, 300);
+  const updateToolBoxPosition = debounce(handleUpdateToolBoxPosition, 100);
 
   function onDragEnd(result: any) {
     if (!result.destination) {
@@ -187,6 +260,12 @@ export function QuestionForm() {
   const addQuestionTemplate = (): void => {
     closeAllExpandedQuestion();
     dispatch({ type: QUESTION_ACTION_TYPES.ADD_NEW_QUESTION });
+    
+    // Update toolkit position after new question is added with a longer delay to ensure DOM is updated
+    setTimeout(() => {
+      updateToolBoxPosition();
+    }, 400);
+    
     toast.success('Question added', {
       position: "bottom-right"
     });

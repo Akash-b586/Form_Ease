@@ -31,11 +31,19 @@
 .doc-card {
   @include flex-column;
   box-sizing: border-box;
+  cursor: pointer;
 
   .doc-image {
     box-sizing: border-box;
     height: 150px;
     width: 100%;
+    border-radius: 2px;
+    border: 0.5px solid #fffdf7;
+    transition: border 0.2s ease;
+  }
+
+  .doc-image:hover {
+    border: 1px solid #6e2594;
   }
 
   .doc-content {
@@ -73,6 +81,20 @@
           padding: $xs;
           margin-right: $xs;
           border-radius: 2px;
+        }
+      }
+    }
+
+    .doc-action {
+      margin-left: auto;
+      position: relative;
+
+      .MuiIconButton-root {
+        color: $textColor;
+        
+        &:hover {
+          color: #6e2594;
+          background-color: rgba(110, 37, 148, 0.1);
         }
       }
     }

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "GFC-FE-APP-main/GFC-FE-APP-main/src/components/Header/Header.scss",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1752663947642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1752663947642,
+            "name": "Commit-0",
+            "content": "@import '../../Styles.scss';\r\n\r\n.header {\r\n  @include flex-row;\r\n  height: $md + $sm;\r\n  background-color: $main;\r\n  padding: $sm 0;\r\n\r\n  .header-info {\r\n    @include flex-row;\r\n\r\n    .form-image {\r\n      height: 10 * $xs;\r\n      width: 10 * $xs;\r\n      cursor: pointer;\r\n      transition: opacity 0.2s ease;\r\n      \r\n      &:hover {\r\n        opacity: 0.7;\r\n      }\r\n    }\r\n\r\n    .info {\r\n      color: $textColor;\r\n      font-size: $lg;\r\n      padding-left: $xs;\r\n    }\r\n  }\r\n\r\n  .header-search {\r\n    @include flex-row;\r\n    background-color: $bgColor;\r\n    border-radius: 10px;\r\n    color: $textColor;\r\n    width: 700px;\r\n    height: 45px;\r\n\r\n    input {\r\n      border: none;\r\n      height: 10 * $xs;\r\n      background: transparent;\r\n      outline: none;\r\n      width: 100%;\r\n    }\r\n  }\r\n\r\n  .row {\r\n    @include flex-row;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 1040px) {\r\n  .header-search {\r\n    display: none !important;\r\n  }\r\n}"
+        }
+    ]
+}

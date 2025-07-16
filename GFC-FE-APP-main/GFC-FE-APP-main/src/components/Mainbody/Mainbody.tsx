@@ -1,24 +1,59 @@
-import { Button, IconButton, Tooltip } from "@mui/material";
+import { Button, IconButton, Tooltip, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import FolderOpenSharpIcon from '@mui/icons-material/FolderOpenSharp';
 import StorageSharpIcon from '@mui/icons-material/StorageSharp';
 import { useEffect, useState } from "react";
 import { Card } from "./Card";
-import { FOLDER_VIEW_TYPE } from "../../utils/constants";
+import { FOLDER_VIEW_TYPE, HTTP_METHODS, REQUEST_URLS, REQUEST_IN_PROGRESS, REQUEST_SUCCESS_MESSAGES, REQUEST_FAILURE_MESSAGES } from "../../utils/constants";
 import "./Mainbody.scss";
 import { useDocumentsName } from "components/contexts/documents-context";
 import { useNavigate } from "react-router-dom";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import useAxios from "utils/axios";
 
 export default function Mainbody() {
   // view document list in table or like files
   const [type, setType] = useState(FOLDER_VIEW_TYPE.FILE);
-  const { filteredFiles } = useDocumentsName();
+  const { filteredFiles, setFiles, files } = useDocumentsName();
   const navigate = useNavigate();
+  const { HttpRequestController, isRequestPending, handlePromiseRequest } = useAxios();
+  
+  // State for delete confirmation dialog
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [documentToDelete, setDocumentToDelete] = useState<string | null>(null);
 
-  // opesn the document
+  // opens the document
   const openForm = (documentId: string) => {
     navigate(`/forms/${documentId}`, { state: { edit: true } });
   }
+
+  // Delete form function
+  const deleteForm = (documentId: string) => {
+    setDocumentToDelete(documentId);
+    setDeleteDialogOpen(true);
+  };
+
+  const sendDeleteRequest = async () => {
+    if (!documentToDelete) return;
+    
+    const res = await HttpRequestController(REQUEST_URLS.DELETE_DOCUMENT + `/${documentToDelete}`, HTTP_METHODS.DELETE);
+    if (res) {
+      setFiles(files.filter((file: any) => {
+        return file._id !== res.documentId
+      }));
+      setDeleteDialogOpen(false);
+      setDocumentToDelete(null);
+    }
+  };
+
+  const handleDeleteConfirm = () => {
+    handlePromiseRequest(sendDeleteRequest, REQUEST_IN_PROGRESS, REQUEST_SUCCESS_MESSAGES.DOCUMENT_DELETED_SUCCESSFULLY,
+      REQUEST_FAILURE_MESSAGES.DOCUMENT_DELETION_FAILED);
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteDialogOpen(false);
+    setDocumentToDelete(null);
+  };
 
   let [rows, setRows] = useState<any>([]);
 
@@ -31,14 +66,27 @@ export default function Mainbody() {
       field: "action",
       align: "center",
       flex: 2,
-      headerName: "",
+      headerName: "Actions",
       sortable: false,
       renderCell: (params: any) => {
-        const onClick = () => {
+        const onOpenClick = () => {
           openForm(filteredFiles[params.row.id - 1]._id);
         };
-        // button to open the document
-        return <Button variant="contained" color="primary" onClick={onClick}>open</Button>;
+        
+        const onDeleteClick = () => {
+          deleteForm(filteredFiles[params.row.id - 1]._id);
+        };
+        
+        return (
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <Button variant="contained" color="primary" onClick={onOpenClick} size="small">
+              Open
+            </Button>
+            <Button variant="outlined" color="error" onClick={onDeleteClick} size="small">
+              Delete
+            </Button>
+          </div>
+        );
       }
     }
   ];
@@ -76,7 +124,7 @@ export default function Mainbody() {
     {type == FOLDER_VIEW_TYPE.FILE && (
       <div className="docs-container">
         {filteredFiles && filteredFiles.length > 0 ? (
-          filteredFiles.map((ele: any, i: string) => <Card key={'id' + i} document={ele} openForm={openForm} />)
+          filteredFiles.map((ele: any, i: string) => <Card key={'id' + i} document={ele} openForm={openForm} deleteForm={deleteForm} />)
         ) : (
           <div style={{ textAlign: "center", fontSize: "20px" }}>
             No records found
@@ -104,5 +152,26 @@ export default function Mainbody() {
         </div>
       </div>
     )}
+
+    {/* Delete Confirmation Dialog */}
+    <Dialog open={deleteDialogOpen} onClose={handleDeleteCancel}>
+      <DialogTitle>Delete Form</DialogTitle>
+      <DialogContent>
+        Are you sure you want to delete this form? This action cannot be undone.
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleDeleteCancel} color="inherit">
+          Cancel
+        </Button>
+        <Button 
+          onClick={handleDeleteConfirm} 
+          color="error" 
+          variant="contained"
+          disabled={isRequestPending}
+        >
+          Delete
+        </Button>
+      </DialogActions>
+    </Dialog>
   </div>
 }

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "GFC-FE-APP-main/GFC-FE-APP-main/src/components/ConfigureQuestionPaper/FormHeader.scss",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1752664068896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1752664068896,
+            "name": "Commit-0",
+            "content": "@import './../../Styles.scss';\r\n\r\n.form-header {\r\n  @include flex-row;\r\n  justify-content: space-between;\r\n  padding: $sm $md;\r\n  flex-wrap: wrap;\r\n  background-color: $main;\r\n\r\n  .form-header-left {\r\n    @include flex-row;\r\n\r\n    img {\r\n      height: $xl + $sm;\r\n      width: 2 * $lg;\r\n      cursor: pointer;\r\n      transition: opacity 0.2s ease;\r\n      \r\n      &:hover {\r\n        opacity: 0.7;\r\n      }\r\n    }\r\n\r\n    .form-header-icon {\r\n      color: $inputColor;\r\n      font-size: $lg;\r\n      margin: 0 $xs;\r\n    }\r\n\r\n    .form-name:focus {\r\n      border-bottom: 1px solid $black;\r\n    }\r\n\r\n    .form-name {\r\n      border: none;\r\n      outline: none;\r\n      font-size: $md;\r\n      line-height: $lg + $xs;\r\n      margin: 0 $md;\r\n      color: $inputColor;\r\n    }\r\n  }\r\n\r\n  .form-header-right {\r\n    @include flex-row;\r\n\r\n    .dropdown {\r\n      position: relative;\r\n      display: inline-block;\r\n\r\n      .dropdown-content {\r\n        display: none;\r\n        position: absolute;\r\n        left: -110px;\r\n        background-color: #f9f9f9;\r\n        width: 160px;\r\n        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);\r\n        z-index: 1;\r\n      }\r\n\r\n      a {\r\n        color: $textColor;\r\n        cursor: pointer;\r\n        padding: $sm $md;\r\n        text-decoration: none;\r\n        display: block;\r\n      }\r\n\r\n      a:hover {\r\n        background-color: $main;\r\n      }\r\n\r\n      .dropdown:hover .dropdown-content {\r\n        display: block;\r\n      }\r\n    }\r\n\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 1040px) {\r\n  body {\r\n    margin: 0;\r\n  }\r\n\r\n  .form-header-left .form-header-icon {\r\n    display: none;\r\n  }\r\n\r\n  .form-header-left span {\r\n    display: none;\r\n  }\r\n\r\n  .mode {\r\n    display: none;\r\n  }\r\n\r\n  .form-name,\r\n  .form-header-left,\r\n  .form-header-right {\r\n    width: 100%;\r\n    margin-right: $sm;\r\n  }\r\n}\r\n\r\n.paper {\r\n  position: relative;\r\n  top: 30%;\r\n  width: 20%;\r\n  margin: 0 auto;\r\n  padding-top: $sm;\r\n  background-color: $main;\r\n  border-radius: $sm;\r\n  padding: $md;\r\n\r\n  #simple-modal-title {\r\n    font-weight: 400;\r\n    text-align: center;\r\n  }\r\n\r\n  .btns {\r\n    @include flex-row;\r\n    justify-content: space-evenly;\r\n    margin: 25px 0;\r\n  }\r\n}\r\n\r\n.response-dialog-box {\r\n  position: relative;\r\n  width: 40%;\r\n  height: 90vh;\r\n  overflow-y: scroll;\r\n  margin: $xl auto;\r\n  padding-top: $sm;\r\n  background-color: $main;\r\n  border-radius: $sm;\r\n  padding: $md;\r\n  background-color: rgb(228, 243, 229);\r\n\r\n  #simple-modal-title {\r\n    font-weight: 400;\r\n    text-align: center;\r\n  }\r\n\r\n  .btns {\r\n    @include flex-row;\r\n    justify-content: space-evenly;\r\n    margin: 25px 0;\r\n  }\r\n}\r\n\r\n.response-dialog-box::-webkit-scrollbar {\r\n  display: none;\r\n}"
+        }
+    ]
+}

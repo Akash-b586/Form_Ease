@@ -1,0 +1,18 @@
+{
+    "sourceFile": "GFC-FE-APP-main/GFC-FE-APP-main/src/components/common/Alert.scss",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1752664068960,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1752664068960,
+            "name": "Commit-0",
+            "content": "@import \"../../Styles.scss\";\r\n\r\n.dialog-content {\r\n  width: 550px;\r\n\r\n  .icon-size {\r\n    font-size: $lg + $xs;\r\n    color: $textColor;\r\n    padding: 0 $xs;\r\n  }\r\n\r\n  .dialog-title {\r\n    @include flex-row;\r\n    font-size: $lg;\r\n    color: $black;\r\n    margin-bottom: $xs;\r\n    padding: $lg;\r\n  }\r\n\r\n  .collect-email {\r\n    @include flex-row;\r\n    justify-content: flex-start;\r\n    background-color: $bgColor;\r\n    font-size: $md;\r\n    padding: $md;\r\n\r\n    input {\r\n      margin-right: $sm;\r\n    }\r\n  }\r\n\r\n  .dialog-row {\r\n    @include flex-row;\r\n    padding: $lg;\r\n    border-bottom: 1px solid #F4F9F9;\r\n\r\n    .dialog-row-in {\r\n      @include flex-row;\r\n\r\n      .send-via {\r\n        font-size: $md;\r\n        font-weight: 500;\r\n        margin-right: $md;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n.dialog-tab-panels-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n\r\n  .dialog-tab-panels {\r\n    @include flex-column;\r\n    align-items: flex-start;\r\n    margin: 0 $lg;\r\n\r\n    .tab-text {\r\n      font-size: $md;\r\n      font-weight: 500;\r\n      letter-spacing: .1px;\r\n      line-height: $lg + $xs;\r\n      color: $black;\r\n      margin-bottom: 2 * $sm;\r\n    }\r\n\r\n    .text-field {\r\n      font-size: $sm;\r\n      margin-bottom: $lg + $xs;\r\n      width: 100%;\r\n    }\r\n\r\n    .include-email {\r\n      font-size: $md;\r\n      @include flex-row;\r\n\r\n      input {\r\n        margin-right: $sm;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n.dialog-footer {\r\n  @include flex-row;\r\n  padding: $lg;\r\n  margin: $sm 0;\r\n\r\n  .dialog-footer-left {\r\n    @include flex-row;\r\n    justify-content: space-around;\r\n    font-size: $sm;\r\n    color: #4285f4;\r\n    font-size: $md;\r\n\r\n    .add-colab {\r\n      margin-right: $sm;\r\n    }\r\n  }\r\n\r\n  .dialog-button {\r\n    color: $textColor;\r\n    text-transform: capitalize;\r\n  }\r\n\r\n  .send {\r\n    @extend .dialog-button;\r\n    margin-left: $sm;\r\n  }\r\n}\r\n\r\n.tab-two {\r\n  display: flex;\r\n  flex-direction: \"column\";\r\n  margin: 0 $lg;\r\n\r\n  .tab-text {\r\n    margin-bottom: 2 * $xs;\r\n  }\r\n}\r\n\r\n.root {\r\n  flex-grow: 1;\r\n  background-color: #f0ebf8;\r\n\r\n  .tab {\r\n    font-size: $sm;\r\n    color: #5f6368;\r\n    text-transform: capitalize;\r\n    height: $sm;\r\n  }\r\n\r\n  .tabs {\r\n    height: 10;\r\n  }\r\n}\r\n\r\n.user-response-container {\r\n  width: 100%;\r\n  height: 79vh;\r\n  margin: 0 auto;\r\n  padding: $sm;\r\n  background-color: rgb(228, 243, 229);\r\n\r\n  .header-title {\r\n    font-size: $lg;\r\n    margin: $sm 0;\r\n    font-weight: 500;\r\n    text-align: center;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 1260px) {\r\n  .user-response-container {\r\n    width: 90%;\r\n    margin: $xl auto;\r\n  }\r\n}\r\n\r\n.bg-green-color {\r\n  background-color: rgb(228, 243, 229);\r\n}\r\n\r\n.Mui-selected {\r\n  color: rgb(76, 175, 80) !important;\r\n}\r\n\r\n.css-1aquho2-MuiTabs-indicator {\r\n  background-color: rgb(76, 175, 80) !important;\r\n}\r\n\r\n.MuiDataGrid-footerContainer {\r\n  background-color: white;\r\n}"
+        }
+    ]
+}

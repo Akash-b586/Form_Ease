@@ -1,0 +1,18 @@
+{
+    "sourceFile": "GFC-FE-APP-main/GFC-FE-APP-main/src/components/Mainbody/Templates.scss",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1752663979463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1752663979463,
+            "name": "Commit-0",
+            "content": "@import '../../Styles.scss';\r\n\r\n.template-section {\r\n  background-color: $bgColor;\r\n  padding-top: $xs;\r\n  padding-bottom: 2 * $lg;\r\n\r\n  .actual-width {\r\n    max-width: 1104px;\r\n    margin: 0 auto;\r\n  }\r\n\r\n  .template-top {\r\n    @include flex-row;\r\n    flex-wrap: wrap;\r\n\r\n    .template-title {\r\n      color: $inputColor;\r\n      font-size: $md;\r\n    }\r\n\r\n    .template-right {\r\n      display: flex;\r\n\r\n      .gallery-button {\r\n        @include flex-row;\r\n        border: none;\r\n        background: transparent;\r\n        outline: none;\r\n        font-size: 14px;\r\n        margin-right: $xs;\r\n      }\r\n    }\r\n  }\r\n\r\n  .template-body {\r\n    @include flex-row;\r\n    justify-content: flex-start;\r\n    flex-wrap: wrap;\r\n\r\n    .card {\r\n      margin-right: $lg;\r\n      margin-top: $sm;\r\n\r\n      .card-image {\r\n        box-sizing: border-box;\r\n        height: 120px;\r\n        width: 171px;\r\n        border-radius: 2px;\r\n        border: 0.5px solid #fffdf7;\r\n        cursor: pointer;\r\n      }\r\n\r\n      .card-image:hover {\r\n        border: 1px solid #6e2594;\r\n      }\r\n\r\n      .title {\r\n        font-size: 14px;\r\n        font-weight: 500;\r\n        color: $inputColor;\r\n        margin-top: $xs;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 760px) {\r\n  .template-section {\r\n    .actual-width {\r\n      padding: 0 $xl;\r\n    }\r\n  }\r\n}"
+        }
+    ]
+}
