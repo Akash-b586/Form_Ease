@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile:node": "tsc",
-    "start": "npm run compile:node && node src/app.ts"
+    "start": "npm run compile:node && node dist/app.js"
   },
   "author": "akash-barwar",
   "license": "ISC",
