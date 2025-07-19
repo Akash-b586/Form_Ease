@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile:node": "tsc",
-    "start": "npm run compile:node && nodemon dist/app.js"
+    "start": "npm run compile:node && nodemon src/app.js"
   },
   "author": "sudeep-manasali",
   "license": "ISC",
