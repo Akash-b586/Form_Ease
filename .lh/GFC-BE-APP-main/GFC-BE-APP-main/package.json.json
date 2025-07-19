@@ -1,0 +1,26 @@
+{
+    "sourceFile": "GFC-BE-APP-main/GFC-BE-APP-main/package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1752960918093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1752960925362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n {\r\n   \"name\": \"gfc-backend\",\r\n   \"version\": \"1.0.0\",\r\n   \"description\": \"google-form-clone backend application\",\r\n-  \"main\": \"\",\r\n+  \"main\": \"src/app\",\r\n   \"scripts\": {\r\n     \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\r\n     \"compile:node\": \"tsc\",\r\n     \"start\": \"npm run compile:node && nodemon src/app.js\"\r\n"
+                },
+                {
+                    "date": 1752960935370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n {\r\n   \"name\": \"gfc-backend\",\r\n   \"version\": \"1.0.0\",\r\n   \"description\": \"google-form-clone backend application\",\r\n-  \"main\": \"src/app\",\r\n+  \"main\": \"src/app.ts\",\r\n   \"scripts\": {\r\n     \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\r\n     \"compile:node\": \"tsc\",\r\n-    \"start\": \"npm run compile:node && nodemon src/app.js\"\r\n+    \"start\": \"npm run compile:node && nodemon src/app.ts\"\r\n   },\r\n   \"author\": \"sudeep-manasali\",\r\n   \"license\": \"ISC\",\r\n   \"dependencies\": {\r\n"
+                }
+            ],
+            "date": 1752960918093,
+            "name": "Commit-0",
+            "content": "{\r\n  \"name\": \"gfc-backend\",\r\n  \"version\": \"1.0.0\",\r\n  \"description\": \"google-form-clone backend application\",\r\n  \"main\": \"\",\r\n  \"scripts\": {\r\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\r\n    \"compile:node\": \"tsc\",\r\n    \"start\": \"npm run compile:node && nodemon src/app.js\"\r\n  },\r\n  \"author\": \"sudeep-manasali\",\r\n  \"license\": \"ISC\",\r\n  \"dependencies\": {\r\n    \"@types/socket.io\": \"^3.0.2\",\r\n    \"bcryptjs\": \"^2.4.3\",\r\n    \"body-parser\": \"^1.20.2\",\r\n    \"cors\": \"^2.8.5\",\r\n    \"dotenv\": \"^16.4.5\",\r\n    \"express\": \"^4.19.2\",\r\n    \"jsonwebtoken\": \"^9.0.2\",\r\n    \"mongoose\": \"^8.4.4\",\r\n    \"pino\": \"^9.2.0\",\r\n    \"pino-pretty\": \"^11.2.1\",\r\n    \"socket.io\": \"^4.7.5\"\r\n  },\r\n  \"devDependencies\": {\r\n    \"@types/cors\": \"^2.8.17\",\r\n    \"@types/express\": \"^4.17.21\",\r\n    \"@types/jsonwebtoken\": \"^9.0.6\",\r\n    \"@types/mongoose\": \"^5.11.97\",\r\n    \"@types/node\": \"^20.14.9\",\r\n    \"nodemon\": \"^3.1.4\",\r\n    \"typescript\": \"^5.7.3\"\r\n  }\r\n}\r\n"
+        }
+    ]
+}

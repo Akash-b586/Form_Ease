@@ -2,11 +2,11 @@
   "name": "gfc-backend",
   "version": "1.0.0",
   "description": "google-form-clone backend application",
-  "main": "index.js",
+  "main": "src/app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile:node": "tsc",
-    "start": "npm run compile:node && nodemon src/app.js"
+    "start": "npm run compile:node && nodemon src/app.ts"
   },
   "author": "sudeep-manasali",
   "license": "ISC",
