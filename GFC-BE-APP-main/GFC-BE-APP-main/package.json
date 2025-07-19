@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile:node": "tsc",
-    "start": "npm run compile:node && nodemon src/app.ts"
+    "start": "npm run compile:node && node src/app.ts"
   },
-  "author": "sudeep-manasali",
+  "author": "akash-barwar",
   "license": "ISC",
   "dependencies": {
     "@types/socket.io": "^3.0.2",
