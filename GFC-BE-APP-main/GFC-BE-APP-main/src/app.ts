@@ -1,4 +1,5 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import questionsRouter from './routes/google-document';
 import userRouter from './routes/user';
@@ -8,6 +9,9 @@ import cors from "cors";
 import mongoose from 'mongoose';
 import { logger } from './common/pino';
 import jwt from "jsonwebtoken";
+
+// Load environment variables
+dotenv.config();
 
 const AUTHORISATION = "Authorization";
 const SOCKET_CONNECTED = "Socket connected: ";
@@ -68,7 +72,7 @@ app.use(questionsRouter);
 //collecting user responses
 app.use(userResponseRouter);
 
-mongoose.connect("mongodb://localhost:27017/google_form_clone")  .then(() => {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/google_form_clone")  .then(() => {
     logger.info(REQUEST_SUCCESS_MESSAGE.DATABASE_CONNECTED_SUCCESSFULLY);
     const server = app.listen(process.env.PORT || 9000, () => {
       logger.info(REQUEST_SUCCESS_MESSAGE.APP_STARTED);

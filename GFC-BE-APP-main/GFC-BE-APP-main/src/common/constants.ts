@@ -74,4 +74,4 @@ export const enum API_REQUEST_ROUTES {
 }
 
 export const UNAUTHORIZED_ACCESS = "Unauthorised resource access..!";
-export const SECRET_KEY = "somesupersecretsecret";
+export const SECRET_KEY = process.env.SECRET_KEY || "somesupersecretsecret";

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "GFC-BE-APP-main/GFC-BE-APP-main/src/app.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1752948184966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1752948184966,
+            "name": "Commit-0",
+            "content": "import express from 'express';\r\nimport dotenv from 'dotenv';\r\nimport bodyParser from 'body-parser';\r\nimport questionsRouter from './routes/google-document';\r\nimport userRouter from './routes/user';\r\nimport userResponseRouter from './routes/user-response';\r\nimport { corsConfig, REQUEST_FAILURE_MESSAGES, REQUEST_SUCCESS_MESSAGE, SECRET_KEY, SOCKET_EVENTS } from './common/constants';\r\nimport cors from \"cors\";\r\nimport mongoose from 'mongoose';\r\nimport { logger } from './common/pino';\r\nimport jwt from \"jsonwebtoken\";\r\n\r\n// Load environment variables\r\ndotenv.config();\r\n\r\nconst AUTHORISATION = \"Authorization\";\r\nconst SOCKET_CONNECTED = \"Socket connected: \";\r\nconst app = express();\r\napp.use(bodyParser.json());\r\napp.use(bodyParser.urlencoded({ extended: true }));\r\nconst corsOptions = {\r\n  origin: [\r\n    'http://localhost:3000',\r\n    'https://gf-clone-c266a.web.app',\r\n    'https://gf-clone-c266a.firebaseapp.com'\r\n  ],\r\n  credentials: true,\r\n  optionSuccessStatus: 200,\r\n  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],\r\n  allowedHeaders: [\r\n    'Origin',\r\n    'X-Requested-With',\r\n    'Content-Type',\r\n    'Accept',\r\n    'Authorization',\r\n    'x-auth-token'\r\n  ]\r\n}\r\napp.use(cors(corsOptions));\r\n\r\n// for user authentication \r\napp.use((req: any, res: any, next: any) => {\r\n  const authHeader = req.get(AUTHORISATION);\r\n  if (!authHeader) {\r\n    req.isUserAuth = false;\r\n    return next();\r\n  }\r\n\r\n  const token = authHeader;\r\n  let decodedToken: any;\r\n  try {\r\n    decodedToken = jwt.verify(token, SECRET_KEY);\r\n  } catch (err) {\r\n    req.isUserAuth = false;\r\n    return next();\r\n  }\r\n  if (!decodedToken) {\r\n    req.isUserAuth = false;\r\n    return next();\r\n  }\r\n  req.userId = decodedToken.userId;\r\n  req.isUserAuth = true;\r\n  next();\r\n});\r\n\r\n// routes for user\r\napp.use(userRouter);\r\n\r\n// document routes\r\napp.use(questionsRouter);\r\n\r\n//collecting user responses\r\napp.use(userResponseRouter);\r\n\r\nmongoose.connect(process.env.MONGODB_URI || \"mongodb://localhost:27017/google_form_clone\")  .then(() => {\r\n    logger.info(REQUEST_SUCCESS_MESSAGE.DATABASE_CONNECTED_SUCCESSFULLY);\r\n    const server = app.listen(process.env.PORT || 9000, () => {\r\n      logger.info(REQUEST_SUCCESS_MESSAGE.APP_STARTED);\r\n    });\r\n\r\n    const io = require('./common/Socket').init(server);\r\n    io.on(SOCKET_EVENTS.CONNECTION, (socket: any) => {\r\n      logger.info(SOCKET_CONNECTED, socket.id);\r\n    });\r\n  })\r\n  .catch((err) => {\r\n    logger.error(REQUEST_FAILURE_MESSAGES.ERROR_IN_CONNECTING_DB, err);\r\n    logger.error(REQUEST_FAILURE_MESSAGES.APP_CRASHED);\r\n    process.exit();\r\n  });\r\n"
+        }
+    ]
+}
