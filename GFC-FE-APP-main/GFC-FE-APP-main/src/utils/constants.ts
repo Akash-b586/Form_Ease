@@ -90,12 +90,10 @@ export const SOCKET_CHANNEL_NAMES = {
 }
 
 export const REQUEST_SUCCESS_MESSAGES = {
-  RESPONSE_LOADED_SUCCESSFULLY: 'Responses loaded successfully',
   LOGGED_IN_SUCCESSFULLY: 'Logged in successfully',
   USER_REGISTERED_SUCCESSFULLY: 'User registered successfully',
   DOCUMENT_DELETED_SUCCESSFULLY: 'Document deleted successfully',
   QUESTIONS_LOADED_SUCCESSFULLY: 'Questions loaded successfully',
-  FORMS_LOADED_SUCCESSFULLY: 'Forms loaded successfully',
   DOCUMENT_CREATED_SUCCESSFULLY: 'Document created successfully',
   QUESTIONS_SAVED_SUCCESSFULLY: "Questions saved successfully",
   REQUEST_SAVED_SUCCESSFULLY: "Response saved successfully"

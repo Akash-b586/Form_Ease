@@ -28,7 +28,8 @@ const DocumentsNameContextProvider: React.FC<any> = ({ children }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      handlePromiseRequest(getDocuments, LOADING, REQUEST_SUCCESS_MESSAGES.FORMS_LOADED_SUCCESSFULLY, REQUEST_FAILURE_MESSAGES.DOCUMENT_LOADING_FAILED);
+      // handlePromiseRequest(getDocuments, LOADING, '', REQUEST_FAILURE_MESSAGES.DOCUMENT_LOADING_FAILED);
+      getDocuments();
     }
   }, [isLoggedIn]);
 

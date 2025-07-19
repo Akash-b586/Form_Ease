@@ -252,7 +252,8 @@ const DocumentContextProvider: React.FC<any> = ({ children }) => {
     // when the user opens the document which is not created by him, then it
     // will not retreive the responses for that document
     if (createdByUserID === user.userId) {
-      handlePromiseRequest(loadResponse, LOADING, REQUEST_SUCCESS_MESSAGES.RESPONSE_LOADED_SUCCESSFULLY, INTERNAL_SERVER_ERROR);
+      // handlePromiseRequest(loadResponse, LOADING, '', INTERNAL_SERVER_ERROR);
+      loadResponse();
     }
   }, [createdByUserID])
 

@@ -31,7 +31,8 @@ export const UserResponseView: React.FC<any> = ({ userId }) => {
 
   // loads the user reponse
   useEffect(() => {
-    handlePromiseRequest(loadResponse, LOADING, REQUEST_SUCCESS_MESSAGES.RESPONSE_LOADED_SUCCESSFULLY, INTERNAL_SERVER_ERROR);
+    // handlePromiseRequest(loadResponse, LOADING, '', INTERNAL_SERVER_ERROR);
+    loadResponse();
   }, []);
 
   return <div className="response-form">
