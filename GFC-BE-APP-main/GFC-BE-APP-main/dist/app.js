@@ -24,8 +24,7 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 const corsOptions = {
     origin: [
         'http://localhost:3000',
-        'https://gf-clone-c266a.web.app',
-        'https://gf-clone-c266a.firebaseapp.com'
+        'https://form-ease-dusky.vercel.app'
     ],
     credentials: true,
     optionSuccessStatus: 200,

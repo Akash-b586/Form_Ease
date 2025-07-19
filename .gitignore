@@ -1,0 +1,25 @@
+# Local History
+.lh/
+
+# Dependencies
+node_modules/
+
+# Environment Variables (CRITICAL - Contains passwords & secrets)
+.env
+.env.local
+.env.production
+
+# Build Output
+dist/
+build/
+
+# Logs
+*.log
+
+# IDE Files
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
