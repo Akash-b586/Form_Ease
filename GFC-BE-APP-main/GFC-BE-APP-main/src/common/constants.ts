@@ -2,6 +2,7 @@
 export const corsConfig = {
   origin: [
     'http://localhost:3000',
+    'https://form-ease-dusky.vercel.app',
     'https://gf-clone-c266a.web.app',
     'https://gf-clone-c266a.firebaseapp.com'
   ],
